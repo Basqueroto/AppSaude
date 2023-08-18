@@ -75,41 +75,41 @@ criar.addEventListener("click", function(){
     comp.innerHTML = 'criar'
     pop.style.display = 'block'
 
-    comp.addEventListener('click', function(event){
-        event.preventDefault()
+})
 
-        let form = new FormData(forma)
-        let nome = form.get('nome')
-        let init = form.get('init-data')
-        let fim = form.get('fim-data')
-        let tex = text.value
+comp.addEventListener('click', function(event){
+    event.preventDefault()
 
-        if (nome != '' && init != '' && fim != ''){
-            key1 = localStorage.getItem("key")
-            key1 = parseInt(key1) + 1
-            localStorage.setItem('key', key1)
+    let form = new FormData(forma)
+    let nome = form.get('nome')
+    let init = form.get('init-data')
+    let fim = form.get('fim-data')
+    let tex = text.value
 
-            let obj = {
-                nome: nome,
-                init: init,
-                fim: fim,
-                descript: tex,
-                id: key1
-            }
-            console.log(obj)
-            let string = JSON.stringify(obj)
-            localStorage.setItem(key1, string)
-            
-            pop.style.display = 'none'
-            comp.innerHTML = 'concluir'
-            gerar(key1)
+    if (nome != '' && init != '' && fim != ''){
+        key1 = localStorage.getItem("key")
+        key1 = parseInt(key1) + 1
+        localStorage.setItem('key', key1)
+
+        let obj = {
+            nome: nome,
+            init: init,
+            fim: fim,
+            descript: tex,
+            id: key1
         }
-        else {
-            alert('erro')
-        }
+        console.log(obj)
+        let string = JSON.stringify(obj)
+        localStorage.setItem(key1, string)
+        
+        pop.style.display = 'none'
+        comp.innerHTML = 'concluir'
+        gerar(key1)
+    }
+    else {
+        alert('erro')
+    }
 
-
-    })
 })
 
 window.onload = function init (){
@@ -141,38 +141,37 @@ function editar(btn) {
     var popE = document.getElementById("popE")
     popE.style.display = 'block'
     console.log(btn.id)
-
-    compE.addEventListener('click', function(event){
-        event.preventDefault()
-        let form = new FormData(formaE)
-        let nome = form.get('nome')
-        let init = form.get('init-data')
-        let fim = form.get('fim-data')
-        let tex = text.value
-
-        if (nome != '' && init != '' && fim != ''){
-            let obj = {
-                nome: nome,
-                init: init,
-                fim: fim,
-                descript: tex,
-                id: key1
-            }
-            let string = JSON.stringify(obj)
-            localStorage.setItem(btn.id, string)
-            
-            pop.style.display = 'none'
-        }
-        var conteudo = document.getElementById("novaTarefa")
-        popE.style.display = 'none'
-        conteudo.innerHTML = ''
-
-        key1 = localStorage.getItem("key")
-        key1 = parseInt(key1)
-
-        for (let i = 1; i <= key1; i++){
-            gerar(i)
-        }
-        })
-    
 }
+
+compE.addEventListener('click', function(event){
+    event.preventDefault()
+    let form = new FormData(formaE)
+    let nome = form.get('nome')
+    let init = form.get('init-data')
+    let fim = form.get('fim-data')
+    let tex = text.value
+
+    if (nome != '' && init != '' && fim != ''){
+        let obj = {
+            nome: nome,
+            init: init,
+            fim: fim,
+            descript: tex,
+            id: key1
+        }
+        let string = JSON.stringify(obj)
+        localStorage.setItem(btn.id, string)
+        
+        pop.style.display = 'none'
+    }
+    var conteudo = document.getElementById("novaTarefa")
+    popE.style.display = 'none'
+    conteudo.innerHTML = ''
+
+    key1 = localStorage.getItem("key")
+    key1 = parseInt(key1)
+
+    // for (let i = 1; i <= key1; i++){
+    //     gerar(i)
+    // }
+    })
