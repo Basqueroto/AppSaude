@@ -21,28 +21,30 @@
         </div>
     </main>
     <div id="pop">
-        <div id="hud">
-            <div id="inp">
-                <input type="text">
-            </div>
-            <div id="btn">
-                <button>completa</button>
-                <button>excluir</button>
-            </div>
-        </div>
-        <div id="info">
-            <div id="btns">
-                <div id="init-data">
-                    <input type="datetime-local">
+        <form action="" id="form">
+            <div id="hud">
+                <div id="inp">
+                    <input type="text" name="nome" required>
                 </div>
-                <div id="fim-data">
-                    <input type="datetime-local">
+                <div id="btn">
+                    <button id="complet" type="submit">completa</button>
+                    <button>excluir</button>
                 </div>
             </div>
-            <div id="descript">
-                <textarea name="descript" id="text" cols="30" rows="10"></textarea>
+            <div id="info">
+                <div id="btns">
+                    <div id="init-data">
+                        <input type="datetime-local" name="init-data" required>
+                    </div>
+                    <div id="fim-data">
+                        <input type="datetime-local" name="fim-data" required>
+                    </div>
+                </div>
+                <div id="descript">
+                    <textarea name="descript" id="text" cols="30" rows="10"></textarea>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
     <script src="script/script.js"></script>
     <script src="https://kit.fontawesome.com/9879f90344.js" crossorigin="anonymous"></script>
