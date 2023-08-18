@@ -1,10 +1,59 @@
 var criar = document.getElementById("criar")
 var key = localStorage.getItem("key")
-// if (key != typeof('string')) {
-//     localStorage.removeItem('key')
-//     localStorage.setItem('key', '{key: 1}')
-//     console.log(key)
-// }
+
+if (key == null){
+    console.log('n existe')
+    localStorage.setItem('key', 1)
+}
+else {
+    console.log('existe')
+}
+
+function gerar (id) {
+    console.log('function ativ')
+    jason = localStorage.getItem(id)
+    jason = JSON.parse(jason)
+    var conteudo = document.getElementById("novaTarefa")
+
+    var novadiv = document.createElement ("div")
+    novadiv.className = "tarefa"
+    novadiv.dataset = jason.id
+
+    var check = document.createElement("input")
+    check.type = "checkbox"
+    check.className = "checkbox"
+
+    check.addEventListener("click", function(){
+        var cheque = document.getElementsByClassName ("checada")
+
+        if (check.className === "checada"){
+            texto.style.textDecoration = "none"
+            texto.style.color = "black"
+            check.className = ""  
+        } else {
+            texto.style.textDecoration = "line-through"
+            check.className = "checada" 
+            texto.style.color = "green" 
+        }
+        
+    })
+
+
+    var texto = document.createElement("p")
+    texto.innerHTML = jason.nome
+
+    var deletar = document.createElement("button")
+    deletar.innerHTML = "<i class='fa-solid fa-trash-can'></i>"
+    deletar.className = "deletar"
+    deletar.onclick = function(){
+        novadiv.style.display = "none"
+    }
+
+    conteudo.appendChild(novadiv);
+    novadiv.appendChild(texto);
+    novadiv.appendChild(check);
+    novadiv.appendChild(deletar);
+}
 
 criar.addEventListener("click", function(){
     var pop = document.getElementById("pop")
@@ -25,29 +74,25 @@ criar.addEventListener("click", function(){
         let tex = text.value
 
         if (nome != '' && init != '' && fim != ''){
+            key1 = localStorage.getItem("key")
+            key1 = parseInt(key1) + 1
+            localStorage.setItem('key', key1)
+
             let obj = {
                 nome: nome,
                 init: init,
                 fim: fim,
-                descript: tex
+                descript: tex,
+                id: key1
             }
             console.log(obj)
             let string = JSON.stringify(obj)
-            localStorage.setItem(nome, string)
-
-            key1 = localStorage.getItem("key")
-            console.log(key1)
-            mud = parseInt(key1[6]) + 1
-            key[6] = mud.toString()
+            localStorage.setItem(key1, string)
             
-            console.log(key1)
+            pop.style.display = 'none'
+            comp.innerHTML = 'concluir'
 
-            localStorage.setItem('key', key1)
-            
-            
-
-            
-
+            gerar(key1)
         }
         else {
             alert('erro')
@@ -55,46 +100,13 @@ criar.addEventListener("click", function(){
 
 
     })
-
-
-    // var conteudo = document.getElementById("novaTarefa")
-
-    // var novadiv = document.createElement ("div")
-    // novadiv.className = "tarefa"
-
-    // var check = document.createElement("input")
-    // check.type = "checkbox"
-    // check.className = "checkbox"
-
-    // check.addEventListener("click", function(){
-    //     var cheque = document.getElementsByClassName ("checada")
-
-    //     if (check.className === "checada"){
-    //         texto.style.textDecoration = "none"
-    //         texto.style.color = "black"
-    //         check.className = ""  
-    //     } else {
-    //         texto.style.textDecoration = "line-through"
-    //         check.className = "checada" 
-    //         texto.style.color = "green" 
-    //     }
-        
-    // })
-
-
-    // var texto = document.createElement("input")
-    // texto.type = "text"
-    // texto.className ="input"
-
-    // var deletar = document.createElement("button")
-    // deletar.innerHTML = "<i class='fa-solid fa-trash-can'></i>"
-    // deletar.className = "deletar"
-    // deletar.onclick = function(){
-    //     novadiv.style.display = "none"
-    // }
-
-    // conteudo.appendChild(novadiv);
-    // novadiv.appendChild(texto);
-    // novadiv.appendChild(check);
-    // novadiv.appendChild(deletar);
 })
+
+window.re = function(){
+    key1 = localStorage.getItem("key")
+    key1 = parseInt(key1)
+
+    for (let i = 1; i < key1; i++){
+        gerar(i)
+    }
+}
