@@ -131,3 +131,15 @@ input[type="checkbox"] {
    input[type="checkbox"]:checked::after {
     opacity: 100%;
    }
+
+/* ----------------------------------------prompt---------------------------------- */
+
+#pop {
+    padding: 20px;  
+    background-color: black;
+    position: absolute;
+    top : 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    display: none;
+}
