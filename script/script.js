@@ -3,7 +3,7 @@ var key = localStorage.getItem("key")
 
 if (key == null){
     console.log('n existe')
-    localStorage.setItem('key', 1)
+    localStorage.setItem('key', 0)
 }
 else {
     console.log('existe')
@@ -102,11 +102,11 @@ criar.addEventListener("click", function(){
     })
 })
 
-window.re = function(){
+window.onload = function init (){
     key1 = localStorage.getItem("key")
     key1 = parseInt(key1)
 
-    for (let i = 1; i < key1; i++){
+    for (let i = 1; i <= key1; i++){
         gerar(i)
     }
 }
