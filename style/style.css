@@ -143,3 +143,13 @@ input[type="checkbox"] {
     transform: translate(-50%, -50%);
     display: none;
 }
+
+#popE {
+    padding: 20px;  
+    background-color: rgb(196, 23, 23);
+    position: absolute;
+    top : 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    display: none;
+}
