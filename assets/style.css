@@ -283,3 +283,32 @@ Pagina principal */
 .simbol{
   width: 40px;
 }
+
+.modal h4{
+  margin: 10px;
+  color: rgb(255, 255, 255);
+  font-family: 'Quicksand', sans-serif;
+}
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  background-color: #B8DAC2;
+  border-radius: 10px;
+  width: 45%;
+}
+
+.modal button {
+  border-radius: 15px;
+  padding: 8px;
+  margin: 20px;
+  background-color: #5c8a6a;
+  border: none;
+  color: #ffffff;
+}
+
+.modal button:hover{
+  transform: scale(1.1);
+}
+

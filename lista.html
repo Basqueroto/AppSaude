@@ -78,7 +78,6 @@
       localStorage.setItem("reminders", JSON.stringify(lis))
     }
     update()
-     
   })
   .catch(function(error) {
     console.log(error);
@@ -100,11 +99,13 @@
     const modalTitleInput = document.createElement("input");
     modalTitleInput.type = "text";
     modalTitleInput.placeholder = "Título da ação";
+    modalTitleInput.classList.add('input')  
     modal.appendChild(modalTitleInput);
 
     const modalStartTimeInput = document.createElement("input");
     modalStartTimeInput.type = "datetime-local";
     modalStartTimeInput.placeholder = "Data e hora de início";
+    modalStartTimeInput.classList.add('input') 
     
     const now = new Date();
     const formattedNow = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, "0")}-${now.getDate().toString().padStart(2, "0")}T${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}`;
@@ -115,6 +116,7 @@
     const modalEndTimeInput = document.createElement("input");
     modalEndTimeInput.type = "datetime-local";
     modalEndTimeInput.placeholder = "Data e hora de término";
+    modalEndTimeInput.classList.add('input') 
 
     const tomorrow = new Date(now);
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -126,6 +128,7 @@
     const modalDescriptionInput = document.createElement("input");
     modalDescriptionInput.type = "text";
     modalDescriptionInput.placeholder = "Descrição da ação";
+    modalDescriptionInput.classList.add('input')
     modal.appendChild(modalDescriptionInput);
 
     const createButton = document.createElement("button");
