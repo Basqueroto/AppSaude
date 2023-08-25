@@ -1,3 +1,8 @@
+import json
+import datetime
+from datetime import date
+from Data import *
+
 import mysql.connector
 
 class Conect:
@@ -47,16 +52,22 @@ class Conect:
             if cursor:
                 exist = True
                 for nome, inicio, fim, descript in cursor:
-                    dic = {'title': nome, 'startTime': inicio, 'endTime': fim, 'description':descript}
-                    lis.append(str(dic))
+                    ini = inicio
+                    ini = str(ini)
+                    fi = fim
+                    fi = str(fi)
+                    #print(ini)
+                    dic = {'title': nome, 'startTime': f'{ini}', 'endTime': f'{fi}', 'description':descript}
+
+                    dic = str(dic)
+                    # dic = dic.replace("'", '')
+                    print(dic)
+                    lis.append(dic)
             else:
-                exist = False
+                lis = False
             cursor.close()
             conect.close()
-            if exist:
-                return lis
-            else:
-                return False
+            return lis
         except mysql.connector.Error as erro:
             print(erro)
             return False

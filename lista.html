@@ -71,23 +71,22 @@
     let acert = data.message // saberemos se deu certo
     // console.log(acert)
     lis = acert
+    console.log(typeof(lis))
     console.log(lis)
+
+    if (!localStorage.getItem("reminders")) {
+      localStorage.setItem("reminders", JSON.stringify(lis))
+    }
+    update()
+     
   })
   .catch(function(error) {
     console.log(error);
   });
 
-  for (var i = 0; i < lis.length; i++){
-    objbanco.push(lis[i])
-  }
-
-  console.log(objbanco)
-
+  
   const btnCreate = document.querySelector(".create");
     /* const reminders = JSON.parse(localStorage.getItem("reminders")) || []; */
-    if (!localStorage.getItem("reminders")) {
-    localStorage.setItem("reminders", JSON.stringify([]));
-    }
 
     btnCreate.addEventListener("click", function() {
 
@@ -194,10 +193,11 @@
       const newAddDiv = document.querySelector(".new-add");
       newAddDiv.innerHTML = "";
 
-      const storedReminders = JSON.parse(localStorage.getItem("reminders"));
+      let storedReminders = JSON.parse(localStorage.getItem("reminders"));
 
-      for (let i = 0; i < storedReminders.length; i++) {
-      const reminder = storedReminders[i];
+      for (let [i, elemento] of storedReminders.entries()) {
+      const reminder = JSON.parse(elemento);
+      console.log("bbbb", reminder)
 
       const reminderDiv = document.createElement("div");
         reminderDiv.className = "reminder";
