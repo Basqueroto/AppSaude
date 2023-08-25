@@ -1,3 +1,5 @@
+import json
+
 import mysql.connector
 
 class Conect:
@@ -48,7 +50,10 @@ class Conect:
                 exist = True
                 for nome, inicio, fim, descript in cursor:
                     dic = {'title': nome, 'startTime': inicio, 'endTime': fim, 'description':descript}
-                    lis.append(str(dic))
+                    dic = str(dic)
+                    dic = dic.replace("'", '')
+                    print(dic)
+                    lis.append(dic)
             else:
                 exist = False
             cursor.close()

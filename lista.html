@@ -63,7 +63,19 @@
     let acert = data.message // saberemos se deu certo
     // console.log(acert)
     lis = acert
+    console.log(typeof(lis))
     console.log(lis)
+    var lis2 = []
+    for (var i = 0; i < lis.length; i++){
+      lis2.push(lis[i].replace("'", ''))
+    }
+
+    console.log(lis2)
+
+    if (!localStorage.getItem("reminders")) {
+      localStorage.setItem("reminders", JSON.stringify(lis2))
+    }
+    update()
      
   })
   .catch(function(error) {
@@ -73,18 +85,6 @@
   
   const btnCreate = document.querySelector(".create");
     /* const reminders = JSON.parse(localStorage.getItem("reminders")) || []; */
-    if (!localStorage.getItem("reminders")) {
-      localStorage.setItem("reminders", JSON.stringify([]))
-      const storedReminders = JSON.parse(localStorage.getItem("reminders"))
-      console.log(lis)
-      for (let i = 0; i < lis.length; i++){
-        let reminder = JSON.parse(lis[i])
-        console.log(reminder)
-        storedReminders.push(reminder)
-      }
-      
-      
-    }
 
     btnCreate.addEventListener("click", function() {
 
