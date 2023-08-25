@@ -65,15 +65,9 @@
     lis = acert
     console.log(typeof(lis))
     console.log(lis)
-    var lis2 = []
-    for (var i = 0; i < lis.length; i++){
-      lis2.push(lis[i].replace("'", ''))
-    }
-
-    console.log(lis2)
 
     if (!localStorage.getItem("reminders")) {
-      localStorage.setItem("reminders", JSON.stringify(lis2))
+      localStorage.setItem("reminders", JSON.stringify(lis))
     }
     update()
      
@@ -191,10 +185,11 @@
       const newAddDiv = document.querySelector(".new-add");
       newAddDiv.innerHTML = "";
 
-      const storedReminders = JSON.parse(localStorage.getItem("reminders"));
+      let storedReminders = JSON.parse(localStorage.getItem("reminders"));
 
-      for (let i = 0; i < storedReminders.length; i++) {
-      const reminder = storedReminders[i];
+      for (let [i, elemento] of storedReminders.entries()) {
+      const reminder = JSON.parse(elemento);
+      console.log("bbbb", reminder)
 
       const reminderDiv = document.createElement("div");
         reminderDiv.className = "reminder";
