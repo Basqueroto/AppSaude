@@ -3,18 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
     <title>registrar</title>
 </head>
-<body>
-    <main>
-        <form action="" id="form">
-            <input type="text" name="nome" id="nome" placeholder="nome">
-            <input type="email" name="email" id="email" placeholder="email">
-            <input type="password" name="password" id="password">
-            <button type="submit" id="btn">enviar</button>
-            <a href="index.html">logar</a>
-        </form>
+<body id="body2">
+    <main id="main2">
+
+        <div id="inpReg">
+
+            <span class="nomesPg">
+                <i class="fa-regular fa-clipboard" style="color: #b8dac2;"></i>
+                <h1>Registre-se</h1>
+            </span>
+
+            <form class="forms" action="" id="form">
+                <input class="input" type="text" name="nome" id="nome" placeholder="nome">
+                <input class="input" type="email" name="email" id="email" placeholder="email">
+                <input class="input" type="password" name="password" id="password" placeholder="password">
+                
+            
+                <button class="button" type="submit" id="btn">
+    
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
+                    </svg>
+                    
+                    <div class="text">
+                        Salvar
+                    </div>
+    
+                <a href="index.html">Já possui conta? Login</a>
+            </form>
+        </div>
+
     </main>
     <script src="script/index.js"></script>
+    <script src="https://kit.fontawesome.com/aa5392bd20.js" crossorigin="anonymous"></script>
 </body>
 </html>
