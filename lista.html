@@ -1,4 +1,81 @@
-const btnCreate = document.querySelector(".create");
+<!DOCTYPE html>
+<html lang="pt-br">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="assets/style.css">
+      <title>AppSaude</title>
+      <script src="https://kit.fontawesome.com/9879f90344.js" crossorigin="anonymous"></script>
+      <!-- <script src="script/script.js"></script> -->
+   </head>
+   <body>
+      <header>
+          <button id="sair">sair</button>
+      </header>
+      <main class="main">
+         <div class="container">
+            <div class="ctn-txt">
+               <h1 class="tittle"><span class="ctn-txt-span"></span>AppSaude</h1>
+            </div>
+            <div class="ctn-btn">
+               <button class="create"><span class="ctn-btn-crt-span"><i class="fa-solid fa-plus"></i></span> Criar </button>
+            </div>
+            <div class="new-add">
+            </div>
+         </div>
+      </main>
+   </body>
+</html>
+<script>
+  var sair = document.getElementById('sair')
+  sair.addEventListener('click', () => {
+    window.location="index.html"
+    fetch('http://127.0.0.1:5000/sair')
+    .then((resp) => resp.json())
+    .then(function(data) {
+        let acert = data.message // saberemos se deu certo
+        console.log(acert)
+    })
+    .catch(function(error) {
+        console.log(error);
+      });
+  })
+
+  var id = 0
+
+  fetch('http://127.0.0.1:5000/home')
+    .then((resp) => resp.json())
+    .then(function(data) {
+        let acert = data.message // saberemos se deu certo
+        console.log(acert)
+        id = acert
+    })
+    .catch(function(error) {
+        console.log(error);
+      });
+
+  var lis = []
+  var objbanco = []
+
+  fetch('http://127.0.0.1:5000/percorrer')
+  .then((resp) => resp.json())
+  .then(function(data) {
+    let acert = data.message // saberemos se deu certo
+    // console.log(acert)
+    lis = acert
+    console.log(lis)
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+
+  for (var i = 0; i < lis.length; i++){
+    objbanco.push(lis[i])
+  }
+
+  console.log(objbanco)
+
+  const btnCreate = document.querySelector(".create");
     /* const reminders = JSON.parse(localStorage.getItem("reminders")) || []; */
     if (!localStorage.getItem("reminders")) {
     localStorage.setItem("reminders", JSON.stringify([]));
@@ -59,6 +136,23 @@ const btnCreate = document.querySelector(".create");
         endTime: endTime,
         description: description,
     };
+
+    fetch('http://127.0.0.1:5000/tarefa', {
+        method: 'POST',
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json' // Especifique o tipo de conteúdo como JSON
+        },
+        body: JSON.stringify(reminder) // Converta o objeto em uma string JSON
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+        let acert = data.message // saberemos se deu certo
+        console.log(acert)
+    })
+    .catch(function(error) {
+        console.log(error);
+      });
 
     const storedReminders = JSON.parse(localStorage.getItem("reminders"));
     storedReminders.push(reminder);
@@ -144,8 +238,28 @@ const btnCreate = document.querySelector(".create");
         deleteButton.innerHTML = '<i class="fa-regular fa-trash-can"></i>';
         // deleteButton.textContent = "Excluir";
         deleteButton.addEventListener("click", function() {
-          storedReminders.splice(i, 1);
+          var ex = storedReminders.splice(i, 1);
           localStorage.setItem("reminders", JSON.stringify(storedReminders));
+
+          console.log(ex[0])
+
+          fetch('http://127.0.0.1:5000/excluir', {
+            method: 'POST',
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json' // Especifique o tipo de conteúdo como JSON
+            },
+            body: JSON.stringify(ex[0]) // Converta o objeto em uma string JSON
+          })
+          .then((resp) => resp.json())
+          .then(function(data) {
+          let acert = data.message // saberemos se deu certo
+          console.log(acert)
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+
           update();
         });
 
@@ -194,6 +308,31 @@ update()
           reminder.endTime = modalEndTimeInput.value;
           reminder.description = modalDescriptionInput.value;
           
+          const mud = {
+            title: reminder.title,
+            startTime: reminder.startTime,
+            endTime: reminder.endTime,
+            description: reminder.description,
+            ed: index
+          }
+
+          fetch('http://127.0.0.1:5000/editar', {
+            method: 'POST',
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json' // Especifique o tipo de conteúdo como JSON
+            },
+            body: JSON.stringify(mud) // Converta o objeto em uma string JSON
+          })
+          .then((resp) => resp.json())
+          .then(function(data) {
+          let acert = data.message // saberemos se deu certo
+          console.log(acert)
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+
           localStorage.setItem("reminders", JSON.stringify(storedReminders));
           update();
           modalEdit.style.display = "none";
@@ -211,3 +350,4 @@ update()
 
         modalEdit.style.display = "block";
         }
+</script>
